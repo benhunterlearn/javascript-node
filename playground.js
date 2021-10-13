@@ -466,6 +466,97 @@ var output = getLongestElement(['one', 'two', 'three']);
 console.log(output); // --> 'three'
 
 
+/* Write a function called "joinArrayOfArrays".
+Given an array of arrays, "joinArrayOfArrays" returns a single array containing the elements of the nested arrays. */
+// You should be familiar with the "concat" method for this problem.
+function joinArrayOfArrays(arr) {
+    return arr.reduce((prev, curr) => prev.concat(curr));
+}
+var output = joinArrayOfArrays([[1, 4], [true, false], ['x', 'y']]);
+console.log(output); // --> [1, 4, true, false, 'x', 'y']
+
+/* Write a function called "findShortestWordAmongMixedElements".
+Given an array, "findShortestWordAmongMixedElements" returns the shortest string within the given array.
+Notes:
+If there are ties, it should return the first element to appear in the given array.
+Expect the given array to have values other than strings.
+If the given array is empty, it should return an empty string.
+If the given array contains no strings, it should return an empty string.  */
+function findShortestWordAmongMixedElements(arr) {
+    if (arr.length === 0) { return "";}
+    return arr.reduce((prev, curr) => {
+        console.log(prev, curr);
+        if (typeof prev === "string" && typeof curr === "string") {
+            return prev.length <= curr.length ? prev : curr;
+        } else if (typeof curr === "string") {
+            return curr;
+        } else {
+            return prev;
+        }
+    });
+  }
+
+var output = findShortestWordAmongMixedElements([4, 'two', 2, 'three']);
+console.log("findShortestWordAmongMixedElements: " + output); // --> 'two'
+
+console.log(typeof "test" === "string"); // --> true
+
+/* Write a function called "findSmallestNumberAmongMixedElements".
+Given an array of mixed elements, "findSmallestNumberAmongMixedElements" returns the smallest number within the given array.
+Notes:
+If the given array is empty, it should return 0.
+If the array contains no numbers, it should return 0. */
+function findSmallestNumberAmongMixedElements(arr) {
+    if (arr.length === 0) {
+        return 0;
+    }
+    const reduction = arr.reduce((prev, curr) => {
+        if (typeof prev === "number" && typeof curr === "number") {
+            return prev <= curr ? prev : curr;
+        } else if (typeof curr === "number") {
+            return curr;
+        } else {
+            return prev;
+        }
+    }, Infinity);
+    if (reduction === Infinity) {
+        return 0;
+    } else {
+        return reduction;
+    }
+}
+var output = findSmallestNumberAmongMixedElements([4, 'lincoln', 9, 'octopus']);
+console.log(output); // --> 4
+
+
+function getLongestWordOfMixedElements(arr) {
+    const stringArray = arr.filter(element => typeof element === "string");
+    if (stringArray.length === 0) {
+        return "";
+    }
+    return stringArray.reduce((prev, curr) => prev.length >= curr.length ? prev : curr);
+}
+
+function getLargestNumberAmongMixedElements(arr) {
+    const numberArray = arr.filter(element => typeof element === "number");
+    if (numberArray.length === 0) {
+        return 0;
+    }
+    return numberArray.reduce((prev, curr) => prev >= curr ? prev : curr);
+}
+
+function getAllWords(str) {
+    return str.split(" ").filter(element => element !== '');
+}
+console.log(getAllLetters("hello")); // --> ['h', 'e', 'l', 'l', 'o']
+
+function convertDoubleSpaceToSingle(str) {
+    return str.split("  ").join(" ");
+}
+
+
+// End JS Array Practice
+//////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
 // High Order Functions

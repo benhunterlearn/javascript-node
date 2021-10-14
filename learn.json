@@ -1,0 +1,35 @@
+{
+    "submittedChallengeAnswer": {
+        "last_graded_at": null,
+        "status": "processing",
+        "id": 19879471,
+        "user_id": 102244,
+        "answer": "// PASTE YOUR Clock IMPLEMENTATION HERE\nclass Clock {\n    constructor(clock) {\n        this._hours = 0;\n        this._minutes = 0;\n        this._seconds = 0;\n\n        if(clock) {\n            this.hours = clock.hours || 0;\n            this.minutes = clock.minutes || 0;\n            this.seconds = clock.seconds || 0;\n        }\n    }\n\n    get hours() {\n        return this._hours;\n    }\n\n    set hours(value) {\n        if(value\u003c=23 \u0026\u0026 value\u003e=0) {\n            this._hours = value;\n        }\n    }\n\n    get minutes() {\n        return this._minutes;\n    }\n\n    set minutes(value) {\n        if(value\u003c=59 \u0026\u0026 value\u003e=0) {\n            this._minutes = value;\n        }\n    }\n\n    get seconds() {\n        return this._seconds;\n    }\n\n    set seconds(value) {\n        if(value\u003c=59 \u0026\u0026 value\u003e=0) {\n            this._seconds = value;\n        }\n    }\n\n    currentTime(){\n\n        return `${this.hours.toString().padStart(2, \"0\")}:${this.minutes.toString().padStart(2, \"0\")}:${this.seconds.toString().padStart(2, \"0\")}`;\n    }\n\n    tick() {\n        let tempSeconds = this.seconds;\n        let tempMinutes = this.minutes;\n        let tempHours = this.hours;\n        tempSeconds++;\n        if (tempSeconds == 60) {\n            tempSeconds = 0;\n            tempMinutes++;\n            if (tempMinutes == 60) {\n                tempMinutes = 0;\n                tempHours++;\n                if (tempHours == 24) {\n                    tempHours = 0;\n                }\n            }\n        }\n        this.seconds = tempSeconds;\n        this.minutes = tempMinutes;\n        this.hours = tempHours;\n        return this;\n    }\n}\n\n// WRITE YOUR DigitalClock IMPLEMENTATION BELOW\nclass DigitalClock extends Clock {\n    constructor(clock) {\n        super(clock);\n        this._format24Hours = true;\n        this._alarms = [];\n    }\n\n    get format() {\n       return this._format24Hours ? '24-hour format' : '12-hour format';\n    }\n\n    set format(value) {\n        this._format24Hours = value;\n    }\n\n    toggleFormat() {\n       this._format24Hours = !this._format24Hours;\n    }\n\n    currentTime(){\n        if(this._format24Hours){\n            return super.currentTime();\n        }\n        else{\n            let meridiem = 'AM';\n            let displayHours = this.hours;\n            if(displayHours\u003e12){\n                meridiem = 'PM';\n                displayHours -= 12;\n            }\n            return `${displayHours.toString().padStart(2, \"0\")}:` +\n                `${this.minutes.toString().padStart(2, \"0\")}:` +\n                `${this.seconds.toString().padStart(2, \"0\")}` +\n                ` ${meridiem}`;\n        }\n    }\n\n    setAlarm(alarm){\n        alarm.hours = alarm.hours || 0;\n        alarm.minutes = alarm.minutes || 0;\n        alarm.seconds = alarm.seconds || 0;\n        this._alarms.push(alarm);\n    }\n\n    tick(){\n        super.tick();\n        // for(const time of this._alarms){\n        //     if(time.hours === this.hours \u0026\u0026 time.minutes === this.minutes \u0026\u0026 time.seconds === this.seconds){\n        //         console.log('ALARM');\n        //     }\n        // }\n        // this._alarms.forEach(function(time){\n        //     if(time.hours === this.hours \u0026\u0026 time.minutes === this.minutes \u0026\u0026 time.seconds === this.seconds){\n        //         console.log('ALARM');\n        //     }\n        // });\n        this._alarms.forEach(time =\u003e {\n            if(time.hours === this.hours \u0026\u0026 time.minutes === this.minutes \u0026\u0026 time.seconds === this.seconds){\n                console.log('ALARM');\n            }\n        });\n        return this;\n    }\n}",
+        "grader_label": null,
+        "challenge_id": 965513,
+        "test_results": "Tests Running…",
+        "instructor_info": null,
+        "points": null,
+        "max_points": 1,
+        "student_comment_url": "/cohorts/2926/users/102244/challenges/965513",
+        "checkpoint_submission_id": null,
+        "rubric": null,
+        "cancel_url": "/cohorts/2926/content_files/507108/submitted_challenge_answers/19879471/cancel",
+        "submitted_challenge_answer_url": "/cohorts/2926/content_files/507108/submitted_challenge_answers/19879471",
+        "update_local_url": "/cohorts/2926/content_files/507108/submitted_challenge_answers/19879471/update_local",
+        "increment_hints_shown_submitted_challenge_answer_url": "/cohorts/2926/content_files/507108/submitted_challenge_answers/19879471/increment_hints_shown",
+        "created_at": "2021-10-12T19:54:35.049Z",
+        "challenge_explanation": null,
+        "incorrect_attempts": 0,
+        "hints": [],
+        "permissions": {
+            "update": false
+        },
+        "updated_at": "2021-10-12T19:54:35.049Z",
+        "submitted_challenge_answer_id": 19879471,
+        "overall_status": "ungraded"
+    }
+}
+
+
+<br /><br />  DigitalClock<br />    new DigitalClock()<br />      ✓ creates a new instance of DigitalClock<br />      ✓ is extended from the Clock class<br />      ✓ accepts options for hours, minutes, and seconds<br />    #format<br />      ✓ should, by default, return a string that says the clock is in 24-hour format<br />      #toggleFormat()<br />        ✓ should toggle between 24-hour format and 12-hour format<br />    #currentTime()<br />      ✓ should return the current time in 24-hour format<br />      ✓ should return the current time in 12-hour format<br />    #setAlarm<br />      ✓ should allow for an alarm to be set at at a specified time<br />ALARM<br />      ✓ should ring the alarm (console.log) when it becomes the specified time<br />ALARM<br />ALARM<br />ALARM<br />      ✓ should ring multiple alarms if the same time is set for multiple alarms<br /><br /><br />  10 passing (30ms)<br /><br />

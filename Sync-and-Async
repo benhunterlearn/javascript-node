@@ -1,0 +1,27 @@
+// Synchronous and Asynchronous JavaScript
+
+function logA() {
+    console.log('A');
+}
+
+function logB() {
+    console.log('B');
+}
+
+setTimeout(() => {
+    console.log('Timeout complete');
+}, 1000);
+
+logA();
+logB();
+
+
+// Can I make and asynchronous foreach?
+function asyncForeach(array, callback) {
+    
+
+asyncForEach([1, 2, 3], (item) => {
+    setTimeout(() => {
+        console.log(item);
+    }, 1000);
+});
